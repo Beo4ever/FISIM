@@ -1,8 +1,8 @@
-#ifndef CSDKCLIENT_H
-#define CSDKCLIENT_H
+#ifndef _CSDKCLIENT_H_
+#define _CSDKCLIENT_H_
 
-#include "net/client.h"
-#include "core/fisim.h"
+#include "../net/client.h"
+#include "../core/fisim.h"
 
 class CSDKClient
 {
@@ -26,4 +26,4 @@ private:
     CCoreFisim * _fisim;
 };
 
-#endif // CSDKCLIENT_H
+#endif // _CSDKCLIENT_H_
