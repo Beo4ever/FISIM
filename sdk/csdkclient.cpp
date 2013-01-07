@@ -1,6 +1,6 @@
 #include "csdkclient.h"
 
-#include "core/protocol.h"
+#include "../core/protocol.h"
 
 CSDKClient::CSDKClient()
 {
