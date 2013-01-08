@@ -8,7 +8,7 @@ CNetSocket::CNetSocket()
 #if defined(_WIN32) || defined(WIN32)
     int wsaInitError = WSAStartup(0x0202, &_wsaData);
     if(wsaInitError != NO_ERROR) { // != 0
-	throw NetException("WSAStartup error");
+        throw NetException("WSAStartup error");
     }
 #endif
     _sock = socket(AF_INET, SOCK_STREAM, 0);
@@ -28,7 +28,7 @@ CNetSocket::CNetSocket()
 
 CNetSocket::~CNetSocket()
 {
-//    CNetSocket::erase();
+    erase();
 }
 
 int CNetSocket::send(const char * buf, int len)
@@ -51,7 +51,7 @@ void CNetSocket::setNonBlocking()
 
     if (opts < 0) {
 
-	return;
+        return;
     }
 
     opts = (opts | O_NONBLOCK);
@@ -70,7 +70,7 @@ void CNetSocket::setBlocking()
 
     if (opts < 0) {
 
-	return;
+        return;
     }
 
     opts = (opts & ~O_NONBLOCK);
@@ -128,10 +128,10 @@ void CNetSocket::erase()
 {
     if(isValid()){
 #ifdef __unix__
-	close(_sock);
+        close(_sock);
 #endif
 #if defined(_WIN32) || defined(WIN32)
-	closesocket(_sock);
+        closesocket(_sock);
 #endif
     }
 
