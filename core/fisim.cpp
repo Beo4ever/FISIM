@@ -41,11 +41,11 @@ unsigned char * CCoreFisim::serializePack(const struct packet & pack, unsigned c
     buffer[0] = pack.flag;
     buffer[1] = pack.value;
     buffer[2] = pack.sender >> 8;
-    buffer[3] = pack.sender;
+    buffer[3] = (unsigned char) pack.sender;
     buffer[4] = pack.receiver >> 8;
-    buffer[5] = pack.receiver;
+    buffer[5] = (unsigned char) pack.receiver;
     buffer[6] = pack.size >> 8;
-    buffer[7] = pack.size;
+    buffer[7] = (unsigned char) pack.size;
 
     if(pack.size > 0) {
         memcpy(buffer + 8, pack.msg, pack.size);
