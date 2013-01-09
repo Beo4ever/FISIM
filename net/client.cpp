@@ -1,3 +1,6 @@
+#if defined(_WIN32) || defined(WIN32)
+#include "../stdafx.h"
+#endif
 #include "client.h"
 
 CNetClient::CNetClient(int sock, sockaddr_in addr)

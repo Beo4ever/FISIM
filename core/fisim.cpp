@@ -1,3 +1,6 @@
+#if defined(_WIN32) || defined(WIN32)
+#include "../stdafx.h"
+#endif
 #include "fisim.h"
 #include <errno.h>
 #include <iostream>
