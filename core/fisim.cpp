@@ -9,7 +9,6 @@ bool CCoreFisim::send(CNetSocket & sock, const struct packet & pack)
 
     unsigned char * ptr = serializePack(pack, buffer);
     len = ptr - buffer;
-    std::cout << len << std::endl;
     return (sock.send((const char *)buffer, len) > 0);
 }
 
