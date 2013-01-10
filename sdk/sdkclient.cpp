@@ -1,3 +1,7 @@
+#if defined(_WIN32) || defined(WIN32)
+#include "../stdafx.h"
+#endif
+
 #include "sdkclient.h"
 
 #include "../core/protocol.h"
