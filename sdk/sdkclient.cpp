@@ -15,6 +15,7 @@ int CSDKClient::connect(const char * address)
     } else {
         try {
             if(! _connection->isValid()) {
+				delete _connection;
                 _connection = new CNetClient();
             }
 
