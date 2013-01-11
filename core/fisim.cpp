@@ -40,20 +40,24 @@ unsigned char * CCoreFisim::serializePack(const struct packet & pack, unsigned c
 {
     memset(buffer, 0, 4096);
 
+    size_t size = (pack.size > Protocol::V_MAX_MSG_SIZE) :
+                    Protocol::V_MAX_MSG_SIZE ?
+                    pack.size;
+
     buffer[0] = pack.flag;
     buffer[1] = pack.value;
     buffer[2] = pack.sender >> 8;
     buffer[3] = (unsigned char) pack.sender;
     buffer[4] = pack.receiver >> 8;
     buffer[5] = (unsigned char) pack.receiver;
-    buffer[6] = pack.size >> 8;
-    buffer[7] = (unsigned char) pack.size;
-
+    buffer[6] = size >> 8;
+    buffer[7] = (unsigned char) size;
+    
     if(pack.size > 0) {
-        memcpy(buffer + 8, pack.msg, pack.size);
+        memcpy(buffer + 8, pack.msg, size);
     }
 
-    return buffer + 8 + pack.size;
+    return buffer + 8 + size;
 }
 
 unsigned char * CCoreFisim::deserializePack(const unsigned char * buffer, struct packet & pack)
@@ -68,6 +72,9 @@ unsigned char * CCoreFisim::deserializePack(const unsigned char * buffer, struct
     pack.receiver += buffer[5];
     pack.size = buffer[6] << 8;
     pack.size += buffer[7];
+    if(pack.size > Protocol::V_MAX_MSG_SIZE) {
+        pack.size = Protocol::V_MAX_MSG_SIZE;
+    }
     if(pack.size > 0) {
         memcpy(pack.msg, buffer + 8, pack.size);
     }
