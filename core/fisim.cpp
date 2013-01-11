@@ -40,8 +40,8 @@ unsigned char * CCoreFisim::serializePack(const struct packet & pack, unsigned c
 {
     memset(buffer, 0, 4096);
 
-    size_t size = (pack.size > Protocol::V_MAX_MSG_SIZE) :
-                    Protocol::V_MAX_MSG_SIZE ?
+    size_t size = (pack.size > Protocol::V_MAX_MSG_SIZE) ?
+                    Protocol::V_MAX_MSG_SIZE :
                     pack.size;
 
     buffer[0] = pack.flag;
