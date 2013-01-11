@@ -40,5 +40,9 @@ struct Protocol {
     F_VERIFY_MSG = 0x2C,
     F_MULTICAST_MSG = 0x2D,
     F_FACETOFACE_MSG = 0x3E;
+
+	static const unsigned short int
+	//max message size
+	V_MAX_MSG_SIZE = 4086;
 };
 #endif

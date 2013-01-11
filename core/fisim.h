@@ -2,6 +2,7 @@
 #define _CORE_FISIM_CLASS_H_
 
 #include "../net/socket.h"
+#include "protocol.h"
 #include <string.h>
 
 class CCoreFisim
@@ -14,8 +15,8 @@ class CCoreFisim
 	    unsigned short int sender;
 	    unsigned short int receiver;
 	    unsigned short int size;
-	    char msg[4086];
-	    packet () {memset(msg, 0, 4086);}
+	    char msg[Protocol::V_MAX_MSG_SIZE];
+	    packet () {memset(msg, 0, Protocol::V_MAX_MSG_SIZE);}
 	};
 
 	bool send(CNetSocket &, const struct packet &);
