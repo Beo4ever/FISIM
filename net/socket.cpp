@@ -17,7 +17,7 @@ CNetSocket::CNetSocket()
     _sock = socket(AF_INET, SOCK_STREAM, 0);
 
     if(!isValid()) {
-        throw NetException("Socket error");
+        throw NetException("Socket Construct error");
     }
 
     // TIME_WAIT - argh
@@ -27,6 +27,16 @@ CNetSocket::CNetSocket()
     }
 
     memset(&_addr, 0, sizeof(_addr));
+}
+
+CNetSocket::CNetSocket(int sock, sockaddr_in addr)
+{
+    _sock = sock;
+    _addr = addr;
+
+    if(!isValid()) {
+        throw NetException("Socket Construct Error");
+    }
 }
 
 CNetSocket::~CNetSocket()

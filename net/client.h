@@ -6,9 +6,9 @@
 class CNetClient : public CNetSocket 
 {
     public:
-        CNetClient() : CNetSocket() {_connected = false;}
-        CNetClient(int , sockaddr_in);
-//	virtual ~CNetClient();
+        CNetClient() {_connected = false;}
+        CNetClient(int sock, sockaddr_in addr) : CNetSocket(sock, addr) { _connected = true; }
+
         bool connect(const char *, const int);
         bool disconnect();
         bool isConnected();

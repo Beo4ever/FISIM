@@ -3,17 +3,6 @@
 #endif
 #include "client.h"
 
-CNetClient::CNetClient(int sock, sockaddr_in addr)
-{
-    _sock = sock;
-    _addr = addr;
-    _connected = false;
-
-    if(!isValid()) {
-        throw NetException("Client Construct Error");
-    }
-}
-
 bool CNetClient::connect(const char * address, const int port)
 {
     setAddr(address, port);

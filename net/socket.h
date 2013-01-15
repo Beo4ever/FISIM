@@ -24,6 +24,7 @@ class CNetSocket {
 
     public:
         CNetSocket();
+        CNetSocket(int , sockaddr_in);
         virtual ~CNetSocket();
         int send(const char *, int = 0);
         int recv(char *, int);
