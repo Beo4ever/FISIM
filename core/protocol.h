@@ -21,6 +21,7 @@ struct Protocol {
     //lobby flags
     F_CONNECT = 0x05,
     F_DISCONNECT = 0x06,
+    F_ONLINE = 0x07,
 
     //instance flags
     F_CREATE_INSTANCE = 0x0B,
