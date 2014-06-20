@@ -3,7 +3,7 @@
 #include <fcntl.h>
 #include <iostream>
 
-CNetSocket::CNetSocket()
+CNetSocket::CNetSocket(bool connectivity)
 {
 #if defined(_WIN32) || defined(WIN32)
     int wsaInitError = WSAStartup(0x0202, &_wsaData);
@@ -11,8 +11,11 @@ CNetSocket::CNetSocket()
 	throw NetException("WSAStartup error");
     }
 #endif
-    _sock = socket(AF_INET, SOCK_STREAM, 0);
-
+    if(connectivity) {
+        _sock = socket(AF_INET, SOCK_STREAM, 0);
+    } else {
+    	_sock = socket(AF_INET, SOCK_DGRAM, 0);
+    }
     if(!isValid()) {
         throw NetException("Socket error");
     }
@@ -41,6 +44,36 @@ int CNetSocket::recv(char * buf, int len)
 {
 
     return ::recv(_sock, buf, len, 0);
+}
+
+int CNetSocket::sendTo(const char *, int = 0)
+{
+
+    return ::sendto(_sock, buf, len, 0, (struct sockaddr *) & _addr, sizeof(_addr));
+}
+
+int CNetSocket::recvFrom(char * buf, int len)
+{
+    int addrLen;
+
+    return ::recvfrom(_sock, buf, len, 0, (struct sockaddr *) & _addr, (socklen_t *) & addrLen);
+}
+
+bool CNetSocket::bind(const char * address, const int port)
+{
+    if(!isValid()) {
+	throw NetException("Socket error");
+    }
+
+    setAddr(address, port);
+
+    int result = ::bind(_sock, (struct sockaddr *) & _addr, sizeof(_addr));
+
+    if(result < 0) {
+	throw NetException("Socket Bind error");
+    }
+
+    return true;
 }
 
 void CNetSocket::setNonBlocking()
