@@ -23,7 +23,7 @@
 class CNetSocket {
 
     public:
-	CNetSocket();
+	CNetSocket(bool connectivity = true);
 	~CNetSocket();
 	int send(const char *, int = 0);
 	int recv(char *, int);
