@@ -27,6 +27,9 @@ class CNetSocket {
 	~CNetSocket();
 	int send(const char *, int = 0);
 	int recv(char *, int);
+	int sendTo(const char *, int = 0);
+	int recvFrom(char *, int);
+	bool bind(const char *, const int);
 	void setNonBlocking();
 	void setBlocking();
 	void setAddr(const char *, const int);
