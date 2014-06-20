@@ -10,7 +10,7 @@ class CNetServer : public CNetSocket {
     public:
 	CNetServer() : CNetSocket() { _clientsCount = 0; _clients.clear();}
 	~CNetServer();
-	int list(const int);
+	bool list(const int);
 	CNetClient* accept();
 	virtual void erase();
     protected:
