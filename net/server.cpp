@@ -8,7 +8,7 @@ CNetServer::~CNetServer()
     erase();
 }
 
-int CNetServer::list(const int max_connect)
+bool CNetServer::list(const int max_connect)
 {
     if(!isValid()) {
 	throw NetException("Server Socket error");
@@ -21,7 +21,7 @@ int CNetServer::list(const int max_connect)
 	throw NetException("Server Listen Error");
     }
 
-    return 0;
+    return true;
 }
 
 CNetClient* CNetServer::accept()
@@ -35,6 +35,7 @@ CNetClient* CNetServer::accept()
     ++_clientsCount;
     _clients[_clientsCount] = new CNetClient(sock, addr);
     std::cout << _clients[_clientsCount] << std::endl;
+    
     return _clients[_clientsCount];
 }
 
