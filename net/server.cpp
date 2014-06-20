@@ -8,23 +8,6 @@ CNetServer::~CNetServer()
     erase();
 }
 
-int CNetServer::bind(const char * address, const int port)
-{
-    if(!isValid()) {
-	throw NetException("Server Socket error");
-    }
-
-    setAddr(address, port);
-
-    int result = ::bind(_sock, (struct sockaddr *) & _addr, sizeof(_addr));
-
-    if(result < 0) {
-	throw NetException("Server Bind error");
-    }
-
-    return 0;
-}
-
 int CNetServer::list(const int max_connect)
 {
     if(!isValid()) {
